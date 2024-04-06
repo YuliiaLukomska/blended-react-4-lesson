@@ -3,7 +3,7 @@ import { addTodo, deleteTodo, fetchTodos } from './operations';
 
 const todosSlice = createSlice({
   name: 'todos',
-  initialState: { todos: [], loading: false, error: null },
+  initialState: { items: [], loading: false, error: null },
   extraReducers: builder =>
     builder
       .addCase(fetchTodos.pending, state => {
@@ -12,7 +12,7 @@ const todosSlice = createSlice({
       })
       .addCase(fetchTodos.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.todos = payload;
+        state.items = payload;
       })
       .addCase(fetchTodos.rejected, (state, { payload }) => {
         state.loading = false;
@@ -24,7 +24,7 @@ const todosSlice = createSlice({
       })
       .addCase(addTodo.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.todos.push(payload);
+        state.items.push(payload);
       })
       .addCase(addTodo.rejected, (state, { payload }) => {
         state.loading = false;
@@ -36,7 +36,7 @@ const todosSlice = createSlice({
       })
       .addCase(deleteTodo.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.todos = state.todos.filter(todo => todo.id !== payload);
+        state.items = state.items.filter(todo => todo.id !== payload);
       })
       .addCase(deleteTodo.rejected, (state, { payload }) => {
         state.loading = false;
